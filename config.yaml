@@ -1,0 +1,34 @@
+# Folder to pull files from
+origin_folder: "D:/TEST/downloads"
+
+# Groups of file extension to organize into folders by category
+extension_groups:
+
+  images:
+    extensions: [".jpg", ".jpeg", ".png"]
+    destination: "D:/TEST/destination/imgs"
+
+  video:
+    extension: [".mov", ".mp4", ".mkv"]
+    destination: "D:/TEST/destination/vids"
+
+  documents:
+    extensions: [".txt", ".pdf", ".docx"]
+    destination: "D:/TEST/destination/docs"
+
+  audio:
+    extensions: [".mp3", ".flac", ".wav"]
+    destination: "D:/TEST/destination/music"
+
+
+modes:
+  default:
+    display_name: "Default"
+    icon: "./icon.ico"
+
+  video_editing:
+    display_name: "Video Editing"
+    icon: "./icons8-brick-96.ico"
+    directories_to_override:
+      images: "D:/TEST/override/img"
+      videos: "D:/TEST/override/vid"
