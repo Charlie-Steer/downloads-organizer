@@ -1,6 +1,10 @@
 # Folder to pull files from
 origin_folder: "D:/TEST/downloads"
 
+parameters:
+  retry_time: 1.0 # Time to wait between moving attempts. Should be because the file is still being written to disk
+  attempt_limit: 60 # Times to attempt to move the file. Just in case the program enters an infinite loop
+
 # Groups of file extension to organize into folders by category
 extension_groups:
 
@@ -9,7 +13,7 @@ extension_groups:
     destination: "D:/TEST/destination/imgs"
 
   video:
-    extension: [".mov", ".mp4", ".mkv"]
+    extensions: [".mov", ".mp4", ".mkv"]
     destination: "D:/TEST/destination/vids"
 
   documents:
