@@ -2,13 +2,14 @@
 origin_folder: "D:/TEST/downloads"
 
 parameters:
+  active_mode: "video_editing"
   retry_time: 1.0 # Time to wait between moving attempts. Should be because the file is still being written to disk
   attempt_limit: 60 # Times to attempt to move the file. Just in case the program enters an infinite loop
 
 # Groups of file extension to organize into folders by category
 extension_groups:
 
-  images:
+  image:
     extensions: [".jpg", ".jpeg", ".png"]
     destination: "D:/TEST/destination/imgs"
 
@@ -16,7 +17,7 @@ extension_groups:
     extensions: [".mov", ".mp4", ".mkv"]
     destination: "D:/TEST/destination/vids"
 
-  documents:
+  document:
     extensions: [".txt", ".pdf", ".docx"]
     destination: "D:/TEST/destination/docs"
 
@@ -28,11 +29,11 @@ extension_groups:
 modes:
   default:
     display_name: "Default"
-    icon: "./icon.ico"
+    icon: "./view-search-eye-human-eye-899760.ico"
 
   video_editing:
     display_name: "Video Editing"
-    icon: "./icons8-brick-96.ico"
+    icon: "./icons8-library-64.ico"
     override_groups:
-        images: "D:/TEST/override/img"
-        videos: "D:/TEST/override/vid"
+        image: "D:/TEST/override/img"
+        video: "D:/TEST/override/vid"

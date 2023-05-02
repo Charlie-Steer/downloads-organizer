@@ -12,14 +12,9 @@ class MyHandler(FileSystemEventHandler):
     def on_created(self, event):
         if event.is_directory:
             return
-        if len(sys.argv) >= 3:
-            filename = os.path.basename(event.src_path)
-            print(f"New file created: {filename}")
-            retry_time = sys.argv[1]
-            attempt_limit = sys.argv[2]
-            subprocess.call(['python', file_organizer, filename, retry_time, attempt_limit])
         else:
-            print("Arguments missing.")
+            filename = os.path.basename(event.src_path)
+            subprocess.call(['python', file_organizer, '--filename', filename])
 
 print("script executes")
 parser = argparse.ArgumentParser()

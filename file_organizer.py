@@ -6,14 +6,14 @@ import time
 import argparse
 
 # Iterate over each file in the Downloads folder
-def move_file(filename, mode, retry_time, attempt_limit):
+def move_file(filename, mode='default', retry_time=1.0, attempt_limit=60):
     # Get the file's full path
     filepath = os.path.join(origin_folder, filename)
     if os.path.isfile(filepath):
         # Check if the file's extension matches any group's extension
         for group_name, group_config in extension_groups.items():
             extensions = group_config['extensions']
-            if mode == 'default' or override_groups.get(group_name):
+            if mode == 'default' or not override_groups.get(group_name):
                 destination = group_config['destination']
             else:
                 destination = override_groups[group_name]
@@ -41,27 +41,29 @@ parser = argparse.ArgumentParser()
 
 # Add arguments to the parser
 parser.add_argument('--filename', type=str, default=None, help='Path to the new file')
-parser.add_argument('--mode', type=str, default='default', help='mode to use override paths from')
-parser.add_argument('--retry_time', type=float, default=1, help='Retry time in seconds')
-parser.add_argument('--attempt_limit', type=int, default=60, help='Maximum number of attempts')
+# parser.add_argument('--mode', type=str, default='default', help='mode to use override paths from')
 
 # Parse the command-line arguments
 args = parser.parse_args()
 
 # Access the values of the arguments
 filename = args.filename
-mode = args.mode
-retry_time = args.retry_time
-attempt_limit = args.attempt_limit
 
 print(args)
 
+with open('active_mode.csv', 'r') as file:
+    mode = file.read().strip()
+    print('mode: ' + mode)
+
 # Load the file groups from a YAML file
-with open('config.yaml', 'r') as f:
-    config = yaml.safe_load(f)
+with open('config.yaml', 'r') as file:
+    config = yaml.safe_load(file)
     origin_folder = config['origin_folder']
     extension_groups = config['extension_groups']
-    override_groups = config['modes'][mode].get('override_groups')
+    modes = config['modes']
+    override_groups = modes[mode].get('override_groups')
+    retry_time = config['parameters']['retry_time']
+    attempt_limit = config['parameters']['attempt_limit']
 
 # if --filename provided then move file.
 if filename:
