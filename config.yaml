@@ -33,6 +33,6 @@ modes:
   video_editing:
     display_name: "Video Editing"
     icon: "./icons8-brick-96.ico"
-    directories_to_override:
-      images: "D:/TEST/override/img"
-      videos: "D:/TEST/override/vid"
+    override_groups:
+        images: "D:/TEST/override/img"
+        videos: "D:/TEST/override/vid"

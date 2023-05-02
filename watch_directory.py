@@ -4,6 +4,7 @@ from watchdog.events import FileSystemEventHandler
 import subprocess
 import os
 import sys
+import argparse
 
 file_organizer = 'file_organizer.py'
 
@@ -20,8 +21,16 @@ class MyHandler(FileSystemEventHandler):
         else:
             print("Arguments missing.")
 
+print("script executes")
+parser = argparse.ArgumentParser()
+parser.add_argument('--attempt_limit', type=int, default=10)
+args = parser.parse_args()
+
+attempt_limit = args.attempt_limit
+print(attempt_limit)  # Output: 60
 
 if __name__ == "__main__":
+    print("main executes")
     path = "D:/TEST/downloads"
     event_handler = MyHandler()
     observer = Observer()
