@@ -4,6 +4,9 @@ import yaml
 import sys
 import time
 import argparse
+import file_converter
+
+# BUG: the execution of this script by itself doesn't work
 
 # Iterate over each file in the Downloads folder
 def move_file(filename, mode='default', retry_time=1.0, attempt_limit=60):
@@ -13,7 +16,7 @@ def move_file(filename, mode='default', retry_time=1.0, attempt_limit=60):
         # Check if the file's extension matches any group's extension
         for group_name, group_config in extension_groups.items():
             extensions = group_config['extensions']
-            if mode == 'default' or not override_groups.get(group_name):
+            if mode == 'default' or not modes[mode].get(override_groups) or not override_groups.get(group_name):
                 destination = group_config['destination']
             else:
                 destination = override_groups[group_name]
@@ -26,7 +29,7 @@ def move_file(filename, mode='default', retry_time=1.0, attempt_limit=60):
                 # Try to move the file every second until you have permission
                 for i in range (attempt_limit):
                     try:
-                        shutil.move(filepath, destination_dir)
+                        new_path = shutil.move(filepath, destination_dir)
                         print("Move succesful!")
                         break
                     except PermissionError as e:
@@ -35,6 +38,11 @@ def move_file(filename, mode='default', retry_time=1.0, attempt_limit=60):
                     except Exception as e:
                         print(f"Error: {e}. Exiting...")
                         sys.exit(0)
+                # Convert .webp to .png
+                if convert_webp_to_png and os.path.splitext(new_path)[1].lower() == '.webp':
+                    image, save_path = file_converter.convert_to_png(new_path)
+                    file_converter.save_image(image, save_path, new_path, True)
+
 
 # Create an ArgumentParser object
 parser = argparse.ArgumentParser()
@@ -64,6 +72,7 @@ with open('config.yaml', 'r') as file:
     override_groups = modes[mode].get('override_groups')
     retry_time = config['parameters']['retry_time']
     attempt_limit = config['parameters']['attempt_limit']
+    convert_webp_to_png = config['parameters']['convert_webp_to_png']
 
 # if --filename provided then move file.
 if filename:
