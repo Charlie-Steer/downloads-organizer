@@ -1,46 +1,54 @@
-# Folder to pull files from
-origin_folder: "D:/TEST/downloads"
+# Folder to listen for new files (downloads)
+# Example: "C:/Users/SomeUser/Downloads"
+origin_folder: "path/to/folder"
 
+# General settings
 parameters:
-  active_mode: "video_editing"
-  retry_time: 1.0 # Time to wait between moving attempts. Should be because the file is still being written to disk
-  attempt_limit: 60 # Times to attempt to move the file. Just in case the program enters an infinite loop
-  convert_webp_to_png: True
+  retry_time: 1.0 # Time in seconds to wait between moving attempts. Should be because the file is still being written to disk.
+  attempt_limit: 60 # Times to attempt to move the file. Just in case the program enters an infinite loop.
+  convert_webp_to_png: False # (True/False) Whether to convert WEBP files to PNG or not. As currently implemented, if True, WebP file will be deleted after conversion.
 
-# Groups of file extension to organize into folders by category
+# Groups of file extension to organize into folders by category.
+# Add and change groups to your liking.
+# Use Linux style paths with "/" or as an alternative "\\"
+# Example: "C:/Users/SomeUser/Pictures"
 extension_groups:
 
-  image:
+  images:
     extensions: [".jpg", ".jpeg", ".png", ".webp"]
-    destination: "D:/TEST/destination/imgs"
+    destination: "path/to/folder"
+  
+  icons:
+    extensions: [".ico"]
+    destination: "path/to/folder"
 
-  video:
+  videos:
     extensions: [".mov", ".mp4", ".mkv"]
-    destination: "D:/TEST/destination/vids"
+    destination: "path/to/folder"
 
-  document:
-    extensions: [".txt", ".pdf", ".docx"]
-    destination: "D:/TEST/destination/docs"
+  documents:
+    extensions: [".txt", ".pdf", ".docx", ".epub"]
+    destination: "path/to/folder"
 
   audio:
     extensions: [".mp3", ".flac", ".wav"]
-    destination: "D:/TEST/destination/music"
+    destination: "path/to/folder"
+  
 
-
+# 'Modes' to override the destination directories for certain groups.
+# Create an 'override_groups' key in any new mode and match the name of any group above to override their destination path.
 modes:
+  # You can change the values from the 'default' mode, but deleting the keys (display_name, icon, shortcut), is likely to lead to errors.
   default:
     display_name: "Default"
-    icon: "./view-search-eye-human-eye-899760.ico"
+    icon: "download.ico"
     shortcut: "ctrl+alt+shift+9"
 
+  # Here you can add any new modes to your liking. With these, none of the keys should be essential.
   video_editing:
     display_name: "Video Editing"
-    icon: "./icons8-library-64.ico"
+    icon: "start.ico"
     shortcut: "ctrl+alt+shift+8"
     override_groups:
-        image: "D:/TEST/override/img"
-        video: "D:/TEST/override/vid"
-  
-  pumpkin_farming:
-    override_groups: Null
-    rolf: "lol"
+        image: "path/to/override/folder"
+        video: "path/to/override/folder"
