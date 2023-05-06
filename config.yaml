@@ -45,10 +45,11 @@ modes:
     shortcut: "ctrl+alt+shift+9"
 
   # Here you can add any new modes to your liking. With these, none of the keys should be essential.
+  # Make sure the names of the override_groups match the desired name of the group to overwrite.
   video_editing:
     display_name: "Video Editing"
     icon: "start.ico"
     shortcut: "ctrl+alt+shift+8"
     override_groups:
-        image: "path/to/override/folder"
-        video: "path/to/override/folder"
+        images: "path/to/override/folder"
+        videos: "path/to/override/folder"
