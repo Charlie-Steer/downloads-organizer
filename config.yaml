@@ -1,38 +1,52 @@
-# Folder to listen for new files (downloads)
-# Example: "C:/Users/SomeUser/Downloads"
-origin_folder: "path/to/folder"
+# Folder to listen for new files
+origin_folder: "D:/Libraries/Downloads"
 
 # General settings
 parameters:
   retry_time: 1.0 # Time in seconds to wait between moving attempts. Should be because the file is still being written to disk.
   attempt_limit: 60 # Times to attempt to move the file. Just in case the program enters an infinite loop.
-  convert_webp_to_png: False # (True/False) Whether to convert WEBP files to PNG or not. As currently implemented, if True, WebP file will be deleted after conversion.
+  convert_webp_to_png: True # (True/False) Whether to convert WEBP files to PNG or not. As currently implemented, if True, WebP file will be deleted after conversion.
 
 # Groups of file extension to organize into folders by category.
 # Add and change groups to your liking.
 # Use Linux style paths with "/" or as an alternative "\\"
-# Example: "C:/Users/SomeUser/Pictures"
 extension_groups:
 
   images:
     extensions: [".jpg", ".jpeg", ".png", ".webp"]
-    destination: "path/to/folder"
+    destination: "D:/Libraries/Pictures/_New_Pictures"
   
   icons:
     extensions: [".ico"]
-    destination: "path/to/folder"
+    destination: "D:/Libraries/Pictures/Icons"
 
   videos:
     extensions: [".mov", ".mp4", ".mkv"]
-    destination: "path/to/folder"
+    destination: "D:/Libraries/Videos/_New_Videos"
 
   documents:
     extensions: [".txt", ".pdf", ".docx", ".epub"]
-    destination: "path/to/folder"
+    destination: "D:/Libraries/Docs"
 
   audio:
     extensions: [".mp3", ".flac", ".wav"]
-    destination: "path/to/folder"
+    destination: "D:/Libraries/Music"
+
+  houdini:
+    extensions: [".hip", ".hipnc,", ".hiplc", ".hip"]
+    destination: "D:/Projects/Houdini/internet_hip_files"
+
+  brushes:
+    extensions: [".abr"]
+    destination: "D:/Assets/Brushes"
+
+  hdris:
+    extensions: [".hdr"]
+    destination: "D:/Assets/HDRIs"
+
+  models:
+    extensions: [".fbx", ".obj", ".gltf", ".alembic", ".bgeo"]
+    destination: "D:/Assets/Models"
   
 
 # 'Modes' to override the destination directories for certain groups.
@@ -50,5 +64,5 @@ modes:
     icon: "start.ico"
     shortcut: "ctrl+alt+shift+8"
     override_groups:
-        image: "path/to/override/folder"
-        video: "path/to/override/folder"
+        images: "D:/Projects/Videos/Python_ChatGPT.Short"
+        videos: "D:/Projects/Videos/Python_ChatGPT.Short"

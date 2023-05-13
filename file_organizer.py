@@ -7,6 +7,8 @@ import argparse
 import file_converter
 from pathlib import Path
 
+print('CAN PRINT')
+
 # Iterate over each file in the Downloads folder
 def moveFile(filename, mode, retry_time=1.0, attempt_limit=60):
     # Get the file's full path

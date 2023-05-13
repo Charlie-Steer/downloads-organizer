@@ -35,7 +35,7 @@ with open('config.yaml', 'r') as file:
 defaultIcon = modes['default']['icon']
 
 # Open the script that listens for new files in the origin folder
-process = subprocess.Popen(['pythonw', 'watch_directory.pyw'], universal_newlines=True)
+process = subprocess.Popen(['python', 'watch_directory.py'], universal_newlines=True)
 
 # Get a list of correctly formated menu entries (must convert to tuple to pass to menu options)
 modes_keys = list(modes.keys())
